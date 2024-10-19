@@ -113,7 +113,7 @@ function loadSong(song) {
 
 loadSong(myData?.songs[index])
 
-const playSong = (id) => {
+function playSong(id){
   const song = myData?.songs.find((song) => song.id === id)
 
   if (myData?.mySong === null || myData?.mySong.id !== song.id) {
@@ -130,13 +130,13 @@ const playSong = (id) => {
   audio.play();
 }
 
-const pauseSong = () => {
+function pauseSong(){
   myData.myTime = audio.currentTime
   player.classList.remove("play")
   audio.pause()
 }
 
-const playNextSong = () => {
+function playNextSong(){
   if (myData?.mySong === null) {
     playSong(myData?.songs[0].id)
   } else {
@@ -149,7 +149,7 @@ const playNextSong = () => {
   }
 }
 
-const playPreviousSong = () => {
+function playPreviousSong(){
   if (myData?.mySong === null) {
     return
   } else {
@@ -170,27 +170,21 @@ function updateProgress(e) {
 
 function setProgress(e) {
   const width = this.clientWidth
-  console.log(width)
   const clickX = e.offsetX
-  console.log(clickX)
   const duration = audio.duration
   audio.currentTime = (clickX / width) * duration
 }
 
-
-const highlightCurrentSong = () => {
-  const playlistSongElements = document.querySelectorAll(".playlist-song")
-  const songToHighlight = document.getElementById(`song-${myData?.songs[index].id}`)
+function highlightCurrentSong () {
+  const playlistSongElements = document.querySelectorAll(".playlist-song");
+  const songToHighlight = document.getElementById(`song-${myData?.mySong?.id}`);
   playlistSongElements.forEach((songEl) => {
     songEl.removeAttribute("aria-current");
   })
-  if (songToHighlight) {
-   songToHighlight.setAttribute("aria-current", "true");
-   console.log(songToHighlight);
-  }
-}
+  songToHighlight.setAttribute("aria-current", "true");
+};
 
-const deleteSong = (id) => {
+function deleteSong(id){
   if (myData?.mySongSong?.id === id) {
     myData.mySong = null
     myData.myTime = 0
@@ -221,7 +215,7 @@ const deleteSong = (id) => {
 }
 
 // Render music
-const renderSongs = (array) => {
+function renderSongs(array){
   const songsHtml = array
     .map((song) => {
       return `
@@ -248,7 +242,7 @@ playButton.addEventListener("click", () => {
 
   const isPlaying = player.classList.contains("play")
   if (isPlaying) {
-    playSong(myData?.mySong?.id)
+    playSong(myData?.mySong?.id);
   } else {
     pauseSong()
   }
@@ -270,3 +264,5 @@ progressContainer.addEventListener("click", setProgress);
 audio.addEventListener("ended", playNextSong);
 
 renderSongs(myData?.songs);
+
+
