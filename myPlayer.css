@@ -30,12 +30,21 @@ body {
   min-height: 100vh;
 }
 
+.warnning {
+  padding: 5em;
+  background-color: red;
+  color: white;
+  border:  inset 3px solid white;
+  border-radius: 1rem;
+}
+
 .container {
   margin: 1.5em auto;
   display: flex;
   flex-direction: column;
   row-gap: 5px;
   max-width: 400px;
+  display: none;
 }
 
 .container.visible {
